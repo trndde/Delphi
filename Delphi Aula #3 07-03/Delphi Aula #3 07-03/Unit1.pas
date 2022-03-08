@@ -1,0 +1,208 @@
+unit Unit1;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, StdCtrls, DB, DBClient, Grids, DBGrids, DBTables;
+
+type
+  TForm1 = class(TForm)
+    lblNome: TLabel;
+    edNome: TEdit;
+    lblSexo: TLabel;
+    cbSexo: TComboBox;
+    ckEstrangeiro: TCheckBox;
+    btAdicionar: TButton;
+    btMostrar: TButton;
+    btSalvar: TButton;
+    cdsCadastro: TClientDataSet;
+    cdsCadastrobdNome: TStringField;
+    cdsCadastrobdEstrangeiro: TBooleanField;
+    cdsCadastrobdSexo: TIntegerField;
+    cdsCadastrobdCodigo: TIntegerField;
+    edCodigo: TEdit;
+    lblCodigo: TLabel;
+    dsCadastro: TDataSource;
+    grCadastro: TDBGrid;
+    tbCadastro: TTable;
+    tbCadastrobdCodigo: TStringField;
+    tbCadastrobdNome: TStringField;
+    tbCadastrobdSexo: TIntegerField;
+    tbCadastrobdEstrangeiro: TBooleanField;
+    btExcluir: TButton;
+    procedure FormCreate(Sender: TObject);
+    procedure btAdicionarClick(Sender: TObject);
+    procedure btMostrarClick(Sender: TObject);
+    procedure edCodigoExit(Sender: TObject);
+    procedure btSalvarClick(Sender: TObject);
+    procedure btExcluirClick(Sender: TObject);
+    procedure edCodigoEnter(Sender: TObject);
+  private
+    { Private declarations }
+    wCdsDiferente: TClientDataSet;
+
+
+    function fDiretorio: String;
+  public
+    { Public declarations }
+  end;
+
+var
+  Form1: TForm1;
+
+implementation
+
+
+{$R *.dfm}
+
+procedure TForm1.FormCreate(Sender: TObject);
+begin
+  cdsCadastro.CreateDataSet;
+  cdsCadastro.Open;
+
+  if not DirectoryExists(fDiretorio) then
+         ForceDirectories(fDiretorio);
+
+  tbCadastro.Active := False;
+  tbCadastro.DatabaseName := fDiretorio;
+  tbCadastro.TableName := 'tCadastro.db';
+  tbCadastro.TableType := ttParadox;
+
+  tbCadastro.IndexDefs.Add('iCODIGO', 'bdCodigo', [ixPrimary, ixUnique]); //Precisa criar o IndexDefs (indice) pra poder usar o IndexFieldsName 
+
+  if not  FileExists(tbCadastro.DatabaseName + '\' + tbCadastro.TableName) then
+          tbCadastro.CreateTable;
+
+  tbCadastro.Open;
+  tbCadastro.Active := True;
+end;
+
+procedure TForm1.btAdicionarClick(Sender: TObject);
+
+begin
+  cdsCadastro.IndexFieldNames:= 'bdCodigo';         // Rotina utilizada pra verificar se o código JA EXISTE e está em uso, caso não esteja, da a opção de inserir novo código.
+  if cdsCadastro.FindKey([edCodigo.Text]) then     // FindKey: Procura informação dentro da tabela
+     cdsCadastro.Edit
+  else
+     cdsCadastro.Insert;
+
+  cdsCadastrobdCodigo.AsString:= edCodigo.Text;
+  cdsCadastrobdNome.AsString:= edNome.Text;
+  cdsCadastrobdSexo.AsInteger:= cbSexo.ItemIndex;
+  cdsCadastrobdEstrangeiro.AsBoolean:= ckEstrangeiro.Checked;
+
+     cdsCadastro.Post;
+
+
+  tbCadastro.IndexFieldNames:= 'bdCodigo';        // Mesma rotina utilizada anteriormente, porém pra tabela (tb) ao invés de ClientDataSet (cds)
+  if tbCadastro.FindKey([edCodigo.Text]) then
+     tbCadastro.Edit
+  else
+     tbCadastro.Insert;
+
+  tbCadastrobdCodigo.AsString:= edCodigo.Text;
+  tbCadastrobdNome.AsString:= edNome.Text;
+  tbCadastrobdSexo.AsInteger:= cbSexo.ItemIndex;
+  tbCadastrobdEstrangeiro.AsBoolean:= ckEstrangeiro.Checked;
+
+     tbCadastro.Post;
+
+end;
+
+procedure TForm1.btMostrarClick(Sender: TObject);  // Rotina do botão Mostrar
+var
+  wSexo: String;
+  wTexto: String;
+  wEstrangeiro: String;
+begin
+
+  wTexto:='';
+
+  cdsCadastro.IndexFieldNames:= 'bdCodigo';   //Ordenar os campos a partir do código
+
+  cdsCadastro.First;
+
+  while not cdsCadastro.Eof do
+    begin
+
+      if cdsCadastrobdSexo.AsInteger = 0 then     //Usar 'cdsCadastrobdSexo' ao invés de 'cbSexo.ItemIndex' pra buscar a informação no Client Data Set (Tabela).
+        wSexo:= 'Masculino'
+      else
+        wSexo:= 'Feminino';
+
+      if cdsCadastrobdEstrangeiro.AsBoolean then
+        wEstrangeiro:= 'Sim'
+      else
+        wEstrangeiro:= 'Não';
+
+  wTexto := wTexto + #13 + 'Código: ' + cdsCadastrobdCodigo.AsString + ' Nome: ' + cdsCadastrobdNome.AsString +
+            ' Sexo: ' + wSexo + ' Estrangeiro: ' + wEstrangeiro;
+
+  cdsCadastro.Next;
+      end;
+  showMessage (wTexto)
+
+end;
+
+procedure TForm1.edCodigoExit(Sender: TObject); //Método pra verificar existencia de cadastro a partir do CÓDIGO informado, pra preencher automaticamente caso exista
+begin
+tbCadastro.IndexFieldNames := 'bdCodigo'; //Procura na coluna 'bdCodigo'
+  if tbCadastro.FindKey([edCodigo.Text]) then //(FindKey) Metódo usado pra achar a informação digitada pelo usuário (edCodigo.Text) dentro da coluna 'bdCodigo'
+     begin
+       edNome.Text := tbCadastrobdNome.AsString;
+       cbSexo.ItemIndex := tbCadastrobdSexo.AsInteger;
+       ckEstrangeiro.Checked := tbCadastrobdEstrangeiro.AsBoolean;
+     end
+  else
+     begin
+       edNome.Text := '';        //Limpa campos caso o Código informado não exista.
+       cbSexo.ItemIndex := -1;
+       ckEstrangeiro.Checked := False;
+     end;
+
+  tbCadastro.IndexFieldNames := 'bdCodigo';
+  btExcluir.Enabled := tbCadastro.FindKey([edCodigo.Text]);   //Verifica se o código existe, e caso exista, habilita o botão Excluir 
+end;
+
+procedure TForm1.btSalvarClick(Sender: TObject);
+var
+  wCdsDiferente: TClientDataSet;       //Criando Client Data Set MANUALMENTE caso o Font não tenha tela 
+begin
+  wCdsDiferente:= TClientDataSet.Create(Self);
+
+  wCdsDiferente.FieldDefs.Add('bdCodigo', ftInteger);
+  wCdsDiferente.FieldDefs.Add('bdNome', ftString, 100);
+  wCdsDiferente.FieldDefs.Add('bdSexo', ftInteger);
+  wCdsDiferente.FieldDefs.Add('bdEstrangeiro', ftBoolean);
+
+  wCdsDiferente.CreateDataSet;
+  wCdsDiferente.Open;
+
+  wCdsDiferente.Insert;
+  wCdsDiferente.FieldByName('bdCodigo').AsString := edCodigo.Text;
+  wCdsDiferente.FieldByName('bdNome').AsString := edNome.Text;
+  wCdsDiferente.FieldByName('bdSexo').AsInteger := cbSexo.ItemIndex;
+  wCdsDiferente.FieldByName('bdEstrangeiro').AsBoolean := ckEstrangeiro.Checked;
+  wCdsDiferente.Post;
+end;
+
+function TForm1.fDiretorio:String;
+begin
+  Result:= ('C:\Users\prog11\Desktop\Delphi Aulas\Delphi Aula #3 07-03\Tabela')
+end;
+
+
+procedure TForm1.btExcluirClick(Sender: TObject);   //Rotina do botão Excluir
+begin
+  tbCadastro.IndexFieldNames := 'bdCodigo';
+  if tbCadastro.FindKey([edCodigo.Text]) then
+     tbCadastro.Delete;
+end;
+
+procedure TForm1.edCodigoEnter(Sender: TObject); //Ao entrar no campo, desabilita o botão Excluir
+begin
+btExcluir.Enabled := False;
+end;
+
+end.
