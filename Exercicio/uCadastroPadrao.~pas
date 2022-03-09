@@ -1,0 +1,60 @@
+unit uCadastroPadrao;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, StdCtrls, uDataModule;
+
+type
+  TfrCadastroPadrao = class(TForm)
+    edCodigo: TEdit;
+    lbCodigo: TLabel;
+    edNome: TEdit;
+    lbNome: TLabel;
+    btSalvar: TButton;
+    btConsultar: TButton;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+    function fDiretorioEmpresa : String;
+    Function fDireotioCliente : String;
+    procedure  pCriartbEmpresa;
+    procedure pCriartbCliente;
+  end;
+
+var
+  frCadastroPadrao: TfrCadastroPadrao;
+
+implementation
+
+{$R *.dfm}
+
+{ TfrCadastroPadrao }
+
+function TfrCadastroPadrao.fDireotioCliente: String;
+begin
+  result :=  'C:\Users\prog10\Desktop\estagio\09.03\Exercicio\tabelaCliente';
+end;
+
+function TfrCadastroPadrao.fDiretorioEmpresa: String;
+begin
+  resut := 'C:\Users\prog10\Desktop\estagio\09.03\Exercicio\tabelaEmpresa';
+end;
+
+procedure TfrCadastroPadrao.pCriartbCliente;
+begin
+  if not DirectoryExists(fDireotioCliente) then
+         ForceDirectories(fDireotioCliente);
+
+
+
+end;
+
+procedure TfrCadastroPadrao.pCriartbEmpresa;
+begin
+
+end;
+
+end.
