@@ -1,0 +1,9 @@
+inherited frConsultaPessoaJuridica: TfrConsultaPessoaJuridica
+  Left = 433
+  Top = 435
+  Width = 687
+  Caption = 'Consulta Pessoa Jur'#237'dica'
+  OldCreateOrder = True
+  PixelsPerInch = 96
+  TextHeight = 13
+end

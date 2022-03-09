@@ -1,0 +1,77 @@
+unit UDataModule;
+
+interface
+
+uses
+  SysUtils, Classes, DB, DBTables;
+
+type
+  TfrDataModule = class(TDataModule)
+    dsCadastroCPF: TDataSource;
+    tbCadastroCPF: TTable;
+    dsCadastroCNPJ: TDataSource;
+    tbCadastroCNPJ: TTable;
+    tbCadastroCPFbdCodigo: TStringField;
+    tbCadastroCPFbdNome: TStringField;
+    tbCadastroCPFbdTelefone: TStringField;
+    tbCadastroCPFbdEndereco: TStringField;
+    tbCadastroCPFbdCEP: TStringField;
+    tbCadastroCPFbdCPF: TStringField;
+    tbCadastroCPFbdData: TStringField;
+    tbCadastroCNPJbdCodigo: TStringField;
+    tbCadastroCNPJbdNome: TStringField;
+    tbCadastroCNPJbdTelefone: TStringField;
+    tbCadastroCNPJbdEndereco: TStringField;
+    tbCadastroCNPJbdCEP: TStringField;
+    tbCadastroCNPJbdRazaoSocial: TStringField;
+    tbCadastroCNPJbdCNPJ: TStringField;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+    procedure pCriarTabelaCadastroCPF;
+    procedure pCriarTabelaCadastroCNPJ;
+  end;
+
+var
+  frDataModule: TfrDataModule;
+
+implementation
+
+{$R *.dfm}
+
+{ TdmTabela }
+
+procedure TfrDataModule.pCriarTabelaCadastroCNPJ;
+begin
+  tbCadastroCNPJ.Active:= False;
+  tbCadastroCNPJ.DatabaseName:= 'C:\Users\prog11\Desktop\Delphi Aula #5 PROJETO\Tabelas';
+  tbCadastroCNPJ.TableName:= 'tCadastroCNPJ.db';
+  tbCadastroCNPJ.TableType:= ttParadox;
+
+  tbCadastroCNPJ.IndexDefs.Add('iCodigo', 'bdCodigo', [ixPrimary, ixUnique]);
+
+  if not FileExists(tbCadastroCNPJ.DatabaseName + '\' + tbCadastroCNPJ.TableName) then
+         tbCadastroCNPJ.CreateTable;
+
+  tbCadastroCNPJ.Active := True;
+  tbCadastroCNPJ.Open;
+end;
+
+procedure TfrDataModule.pCriarTabelaCadastroCPF;
+begin
+  tbCadastroCPF.Active:= False;
+  tbCadastroCPF.DatabaseName:= 'C:\Users\prog11\Desktop\Delphi Aula #5 PROJETO\Tabelas';
+  tbCadastroCPF.TableName:= 'tCadastroCPF.db';
+  tbCadastroCPF.TableType:= ttParadox;
+
+  tbCadastroCPF.IndexDefs.Add('iCodigo', 'bdCodigo', [ixPrimary, ixUnique]);  
+
+  if not FileExists(tbCadastroCPF.DatabaseName + '\' + tbCadastroCPF.TableName) then
+         tbCadastroCPF.CreateTable;
+
+  tbCadastroCPF.Active := True;
+  tbCadastroCPF.Open;
+end;
+
+end.

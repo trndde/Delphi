@@ -1,0 +1,12 @@
+inherited frConsultaPessoaFisica: TfrConsultaPessoaFisica
+  Left = 363
+  Top = 462
+  Width = 542
+  Caption = 'Consulta CPF'
+  OldCreateOrder = True
+  PixelsPerInch = 96
+  TextHeight = 13
+  inherited btExcluir: TButton
+    Top = 192
+  end
+end

@@ -1,0 +1,9 @@
+unit UClasses;
+
+interface
+type
+  TCadastro
+
+implementation
+
+end.
