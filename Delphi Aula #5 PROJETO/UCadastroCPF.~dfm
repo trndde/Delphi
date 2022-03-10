@@ -24,6 +24,7 @@ inherited frCadastroPessoaFisica: TfrCadastroPessoaFisica
     EditLabel.Height = 13
     EditLabel.Caption = 'CPF (somente n'#250'meros)'
     TabOrder = 7
+    OnKeyPress = edCPFKeyPress
   end
   object edData: TLabeledEdit
     Left = 168

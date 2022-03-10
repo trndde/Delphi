@@ -26,7 +26,7 @@ implementation
 
 procedure TfrPadraoConsulta.btExcluirClick(Sender: TObject);
 begin
-grPadrao.DataSource.DataSet.Delete
+grPadrao.DataSource.DataSet.Delete;
 end;
 
 end.

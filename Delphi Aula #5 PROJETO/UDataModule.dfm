@@ -1,7 +1,7 @@
 object frDataModule: TfrDataModule
   OldCreateOrder = False
-  Left = 276
-  Top = 136
+  Left = 202
+  Top = 540
   Height = 150
   Width = 236
   object dsCadastroCPF: TDataSource

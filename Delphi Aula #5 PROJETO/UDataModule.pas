@@ -29,7 +29,7 @@ type
     { Private declarations }
   public
     { Public declarations }
-    procedure pCriarTabelaCadastroCPF;
+    procedure pCriarTabelaCadastroCPF;     //Declarar procedures de criar tabela e dar Ctrl+Shift+C
     procedure pCriarTabelaCadastroCNPJ;
   end;
 
@@ -44,24 +44,24 @@ implementation
 
 procedure TfrDataModule.pCriarTabelaCadastroCNPJ;
 begin
-  tbCadastroCNPJ.Active:= False;
-  tbCadastroCNPJ.DatabaseName:= 'C:\Users\prog11\Desktop\Delphi Aula #5 PROJETO\Tabelas';
-  tbCadastroCNPJ.TableName:= 'tCadastroCNPJ.db';
-  tbCadastroCNPJ.TableType:= ttParadox;
+  tbCadastroCNPJ.Active:= False;                  //Configuração padrão de tabela, começa desativando ela
+  tbCadastroCNPJ.DatabaseName:= 'C:\Tabelas';     //Nome da pasta (Database)
+  tbCadastroCNPJ.TableName:= 'tCadastroCNPJ.db';  //Nome da tabela .db
+  tbCadastroCNPJ.TableType:= ttParadox;           //Tipo da tabela, ttParadox
 
-  tbCadastroCNPJ.IndexDefs.Add('iCodigo', 'bdCodigo', [ixPrimary, ixUnique]);
+  tbCadastroCNPJ.IndexDefs.Add('iCodigo', 'bdCodigo', [ixPrimary, ixUnique]); //Declarar IndexDefs pra poder usar o índice
 
-  if not FileExists(tbCadastroCNPJ.DatabaseName + '\' + tbCadastroCNPJ.TableName) then
-         tbCadastroCNPJ.CreateTable;
+  if not FileExists(tbCadastroCNPJ.DatabaseName + '\' + tbCadastroCNPJ.TableName) then  //Verificar existencia do arquivo de tabela, caso não exista
+         tbCadastroCNPJ.CreateTable;                                                    //cria uma tabela
 
-  tbCadastroCNPJ.Active := True;
-  tbCadastroCNPJ.Open;
+  tbCadastroCNPJ.Active := True;                //Ativa a tabela
+  tbCadastroCNPJ.Open;                          //e abre
 end;
 
 procedure TfrDataModule.pCriarTabelaCadastroCPF;
 begin
   tbCadastroCPF.Active:= False;
-  tbCadastroCPF.DatabaseName:= 'C:\Users\prog11\Desktop\Delphi Aula #5 PROJETO\Tabelas';
+  tbCadastroCPF.DatabaseName:= 'C:\Tabelas';
   tbCadastroCPF.TableName:= 'tCadastroCPF.db';
   tbCadastroCPF.TableType:= ttParadox;
 

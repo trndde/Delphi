@@ -4,7 +4,7 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, UClasses, StdCtrls, ExtCtrls;
+  Dialogs, UClasses, StdCtrls, ExtCtrls, UDataModule;
 
 type
   TfrPadraoCadastro = class(TForm)
@@ -27,5 +27,7 @@ var
 implementation
 
 {$R *.dfm}
+
+
 
 end.

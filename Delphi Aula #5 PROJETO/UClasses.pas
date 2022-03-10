@@ -1,6 +1,6 @@
 unit UClasses;
 
-interface
+interface                          //Classe mãe, contém campos em comum com a classe filha
 type
   TCadastro = class
   public
@@ -12,7 +12,7 @@ type
   end;
 
 type
-  TCadastroCPF = class(TCadastro)
+  TCadastroCPF = class(TCadastro)  //Classe filha, mesmos campos da classe mãe mas com campos exclusivos dela 
   public
    wCPF : String;
    wData: String;

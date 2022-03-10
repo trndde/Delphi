@@ -45,7 +45,7 @@ implementation
 procedure TfrDataModule.pCriarTabelaCadastroCNPJ;
 begin
   tbCadastroCNPJ.Active:= False;
-  tbCadastroCNPJ.DatabaseName:= 'C:\Users\prog11\Desktop\Delphi Aula #5 PROJETO\Tabelas';
+  tbCadastroCNPJ.DatabaseName:= 'C:\Tabelas';
   tbCadastroCNPJ.TableName:= 'tCadastroCNPJ.db';
   tbCadastroCNPJ.TableType:= ttParadox;
 
@@ -61,7 +61,7 @@ end;
 procedure TfrDataModule.pCriarTabelaCadastroCPF;
 begin
   tbCadastroCPF.Active:= False;
-  tbCadastroCPF.DatabaseName:= 'C:\Users\prog11\Desktop\Delphi Aula #5 PROJETO\Tabelas';
+  tbCadastroCPF.DatabaseName:= 'C:\Tabelas';
   tbCadastroCPF.TableName:= 'tCadastroCPF.db';
   tbCadastroCPF.TableType:= ttParadox;
 

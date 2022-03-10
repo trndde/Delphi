@@ -4,7 +4,7 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, UPadraoCadastro, StdCtrls, ExtCtrls, UClasses, UDataModule, UCadastroCNPJ, UConsultaCPF, UConsultaCNPJ;
+  Dialogs, UPadraoCadastro, StdCtrls, ExtCtrls, UClasses, UDataModule, UConsultaCPF; //Inserir Units das classes, do DataModule e da consulta
 
 type
   TfrCadastroPessoaFisica = class(TfrPadraoCadastro)
@@ -12,6 +12,7 @@ type
     edData: TLabeledEdit;
     procedure btSalvarClick(Sender: TObject);
     procedure btConsultaClick(Sender: TObject);
+    procedure edCPFKeyPress(Sender: TObject; var Key: Char);
   private
     { Private declarations }
   public
@@ -29,7 +30,7 @@ procedure TfrCadastroPessoaFisica.btSalvarClick(Sender: TObject);
 var
  wCadastro: TCadastroCPF;
 begin
-  inherited;
+  inherited;                                                      //Atribui valores aos campos a partir do texto digitado pelo usuario
   wCadastro := TCadastroCPF.Create;
   wCadastro.wCodigoCliente := edCodigoCliente.Text;
   wCadastro.wNomeCliente := edNomeCliente.Text;
@@ -41,7 +42,7 @@ begin
 
   frDataModule.pCriarTabelaCadastroCPF;
 
-  frDataModule.tbCadastroCPF.Insert;
+  frDataModule.tbCadastroCPF.Insert;                                                         //Insere os valores na tabela
   frDataModule.tbCadastroCPF.FieldByName('bdCodigo').AsString := wCadastro.wCodigoCliente;
   frDataModule.tbCadastroCPF.FieldByName('bdNome').AsString :=  wCadastro.wNomeCliente;
   frDataModule.tbCadastroCPF.FieldByName('bdTelefone').AsString := wCadastro.wTelefone;
@@ -53,7 +54,7 @@ begin
 
 end;
 
-procedure TfrCadastroPessoaFisica.btConsultaClick(Sender: TObject);
+procedure TfrCadastroPessoaFisica.btConsultaClick(Sender: TObject);  //Botão consulta, pra abrir tela de consulta
 var
   wConsultaCPF: TfrConsultaPessoaFisica;
 begin
@@ -61,6 +62,32 @@ begin
   wConsultaCPF := TfrConsultaPessoaFisica.Create(Self);
   wConsultaCPF.Show;
 
+end;
+
+procedure TfrCadastroPessoaFisica.edCPFKeyPress(Sender: TObject;
+  var Key: Char);
+begin
+  inherited;
+   if Key = #8 then
+      exit;
+
+   if Length(EdCPF.Text) = 3 then
+      begin
+         edCPF.Text := edCPF.Text + '.';
+         edCPF.Selstart := Length(edCPF.text);
+      end;
+
+   if Length(edCPF.Text) = 7 then
+      begin
+         edCPF.Text := edCPF.Text + '.';
+         edCPF.Selstart := Length(edCPF.text);
+      end;
+
+   if Length(edCPF.Text) = 11 then
+      begin
+         edCPF.Text := edCPF.Text + '-';
+         edCPF.Selstart := Length(edCPF.text);
+      end;
 end;
 
 end.

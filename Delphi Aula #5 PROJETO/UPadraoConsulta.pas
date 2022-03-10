@@ -24,9 +24,9 @@ implementation
 
 {$R *.dfm}
 
-procedure TfrPadraoConsulta.btExcluirClick(Sender: TObject);
+procedure TfrPadraoConsulta.btExcluirClick(Sender: TObject);  //Procedure simples pro botão excluir
 begin
-grPadrao.DataSource.DataSet.Delete;
+grPadrao.DataSource.DataSet.Delete;       //DBGrid, chama data source e comunica pro data set deletar a linha selecionada 
 end;
 
 end.

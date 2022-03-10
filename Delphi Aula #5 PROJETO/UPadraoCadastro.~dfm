@@ -1,6 +1,6 @@
 object frPadraoCadastro: TfrPadraoCadastro
-  Left = 254
-  Top = 174
+  Left = 639
+  Top = 233
   Width = 425
   Height = 480
   Caption = 'PadraoCadastro'
