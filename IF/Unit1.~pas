@@ -1,0 +1,78 @@
+unit Unit1;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, StdCtrls;
+
+type
+  TForm1 = class(TForm)
+    Ed1: TEdit;
+    Label1: TLabel;
+    Label2: TLabel;
+    CheckBox1: TCheckBox;
+    ComboBox1: TComboBox;
+    Button1: TButton;
+    Button2: TButton;
+    procedure Button1Click(Sender: TObject);
+    procedure CheckBox1Click(Sender: TObject);
+    procedure Button2Click(Sender: TObject);
+  private
+    { Private declarations }
+      name: String;
+
+     procedure nome;
+     function mnome: String;
+  public
+    { Public declarations }
+  end;
+
+var
+  Form1: TForm1;
+
+implementation
+
+{$R *.dfm}
+
+
+procedure TForm1.nome;
+begin
+ShowMessage(Ed1.text);
+end;
+
+procedure TForm1.Button1Click(Sender: TObject);
+ begin
+nome;
+end;
+
+procedure TForm1.CheckBox1Click(Sender: TObject);
+var
+SimNao: Boolean;
+sexo: integer;
+begin
+sexo := ComboBox1.ItemIndex;
+     if sexo = 0 then
+     ShowMessage('Sexo: Masculino')
+     else
+     ShowMessage('Sexo: Feminino');
+
+     SimNao := CheckBox1.Checked;
+     if SimNao then
+     ShowMessage('Estrangeiro: Sim')
+     else
+     ShowMessage('Estrangeiro: Não')
+end;
+
+
+function TForm1.mnome: String;
+begin
+Ed1.text := name;
+ end;
+
+procedure TForm1.Button2Click(Sender: TObject);
+begin
+  ShowMessage (Ed1.Text);
+end;
+
+end.
