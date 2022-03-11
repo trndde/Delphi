@@ -1,0 +1,8 @@
+inherited frTelaOpcaoMedico: TfrTelaOpcaoMedico
+  Caption = 'frTelaOpcaoMedico'
+  PixelsPerInch = 96
+  TextHeight = 13
+  inherited btCadastrar: TButton
+    OnClick = btCadastrarClick
+  end
+end

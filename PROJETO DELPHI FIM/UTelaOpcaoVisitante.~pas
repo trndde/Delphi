@@ -1,0 +1,24 @@
+unit UTelaOpcaoVisitante;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, UTelaOpcaoPadrao, StdCtrls;
+
+type
+  TfrTelaOpcaoVisitante = class(TfrTelaOpcaoPadrao)
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frTelaOpcaoVisitante: TfrTelaOpcaoVisitante;
+
+implementation
+
+{$R *.dfm}
+
+end.

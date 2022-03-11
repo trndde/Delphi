@@ -1,0 +1,93 @@
+object frDataModule: TfrDataModule
+  OldCreateOrder = False
+  Left = 462
+  Top = 140
+  Height = 254
+  Width = 469
+  object dsPaciente: TDataSource
+    DataSet = tbCadastroPaciente
+    Left = 32
+    Top = 24
+  end
+  object dsVisitante: TDataSource
+    DataSet = cdsCadastroVisitante
+    Left = 32
+    Top = 88
+  end
+  object dsMedico: TDataSource
+    DataSet = tbCadastroMedico
+    Left = 32
+    Top = 144
+  end
+  object cdsCadastroVisitante: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    Left = 144
+    Top = 80
+  end
+  object tbCadastroPaciente: TTable
+    Left = 144
+    Top = 24
+    object tbCadastroPacientebdCodigo: TIntegerField
+      FieldName = 'bdCodigo'
+    end
+    object tbCadastroPacientebdNome: TStringField
+      FieldName = 'bdNome'
+      Size = 100
+    end
+    object tbCadastroPacientebdData: TStringField
+      FieldName = 'bdData'
+      Size = 100
+    end
+    object tbCadastroPacientebdCPF: TStringField
+      FieldName = 'bdCPF'
+      Size = 100
+    end
+    object tbCadastroPacientebdRG: TStringField
+      FieldName = 'bdRG'
+      Size = 100
+    end
+    object tbCadastroPacientebdSexo: TIntegerField
+      FieldName = 'bdSexo'
+    end
+    object tbCadastroPacientebdTelefone: TStringField
+      FieldName = 'bdTelefone'
+      Size = 100
+    end
+    object tbCadastroPacientebdEmail: TStringField
+      FieldName = 'bdEmail'
+      Size = 100
+    end
+    object tbCadastroPacientebdEndereco: TStringField
+      FieldName = 'bdEndereco'
+      Size = 100
+    end
+    object tbCadastroPacientebdCEP: TStringField
+      FieldName = 'bdCEP'
+      Size = 100
+    end
+    object tbCadastroPacientebdCidade: TStringField
+      FieldName = 'bdCidade'
+      Size = 100
+    end
+    object tbCadastroPacientebdEstado: TStringField
+      FieldName = 'bdEstado'
+      Size = 100
+    end
+    object tbCadastroPacientebdPais: TStringField
+      FieldName = 'bdPais'
+      Size = 100
+    end
+    object tbCadastroPacientebdContatoAcompanhante: TStringField
+      FieldName = 'bdContatoAcompanhante'
+      Size = 100
+    end
+    object tbCadastroPacientebdPrioridade: TIntegerField
+      FieldName = 'bdPrioridade'
+    end
+  end
+  object tbCadastroMedico: TTable
+    Left = 144
+    Top = 144
+  end
+end

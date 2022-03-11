@@ -1,0 +1,7 @@
+inherited frTelaOpcaoPaciente: TfrTelaOpcaoPaciente
+  Left = 302
+  Top = 201
+  Caption = 'frTelaOpcaoPaciente'
+  PixelsPerInch = 96
+  TextHeight = 13
+end
