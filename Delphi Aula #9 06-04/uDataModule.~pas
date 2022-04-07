@@ -1,0 +1,41 @@
+unit uDataModule;
+
+interface
+
+uses
+  SysUtils, Classes, DB, DBTables;
+
+type
+  TfrDataModule = class(TDataModule)
+    dsCadastro: TDataSource;
+    tbCadastro: TTable;
+    tbCadastroBDCODIGO: TIntegerField;
+    tbCadastroBDRAZAO: TStringField;
+    tbCadastroBDNOMEFANTASIA: TStringField;
+    tbCadastroBDCNPJ: TStringField;
+    tbCadastroBDINSCRICAO: TStringField;
+    tbCadastroBDCNAE: TStringField;
+    tbCadastroBDEMAIL: TStringField;
+    tbCadastroBDLOGRADOURO: TStringField;
+    tbCadastroBDNUMERO: TStringField;
+    tbCadastroBDCEP: TStringField;
+    tbCadastroBDBAIRRO: TStringField;
+    tbCadastroBDCIDADE: TStringField;
+    tbCadastroBDESTADO: TStringField;
+    tbCadastroBDTELEFONE: TStringField;
+    tbCadastroBDCELULAR: TStringField;
+    tbCadastroBDINICIOATIVIDADE: TStringField;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frDataModule: TfrDataModule;
+
+implementation
+
+{$R *.dfm}
+
+end.
